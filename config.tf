@@ -16,12 +16,12 @@ data "oci_identity_tenancy" "resident" { tenancy_id = var.tenancy.id }
 locals {
     defined_tags = {
         for tag in var.resident.tags : "${tag.namespace}.${tag.name}" => tag.default
-        if tag.stage <= var.service.stage
+        if tag.stage <= var.resident.stage
     }
     freeform_tags = {
         "framework" = "ocloud"
         "owner"     = var.resident.owner
-        "lifecycle" = var.service.stage
+        "lifecycle" = var.resident.stage
         "class"     = var.tenancy.class
     }
 }
